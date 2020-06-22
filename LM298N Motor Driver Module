@@ -1,0 +1,17 @@
+# Define pins for input of LM298N Motor Driver Module. 
+# The LM298N has 4 data input pins used to control the direction of motor connected to it.
+
+int revleft4 = 4;       //REVerse motion of Left motor
+int fwdleft5 = 5;       //ForWarD motion of Left motor
+int revright6 = 6;      //REVerse motion of Right motor
+int fwdright7 = 7;      //ForWarD motion of Right motor
+
+# In setup() function, define the data direction of utilised GPIO pins. 
+# The four Motor pins and Trig pin is set as OUTPUT and Echo Pin is set as Input
+
+pinMode(revleft4, OUTPUT);      // set Motor pins as output
+pinMode(fwdleft5, OUTPUT);
+pinMode(revright6, OUTPUT);
+pinMode(fwdright7, OUTPUT); 
+pinMode(trigPin, OUTPUT);         // set trig pin as output
+pinMode(echoPin, INPUT);          //set echo pin as input to capture reflected waves
