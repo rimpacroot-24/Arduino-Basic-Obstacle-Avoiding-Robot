@@ -1,0 +1,53 @@
+# Define trigger and echo pin of HC-SR04
+
+int trigPin = 9;      // Trigger pin of HC-SR04
+int echoPin = 10;     // Echo pin of HC-SR04
+
+# In loop() function, get the distance from HC-SR04 and based on the distance move the motor direction.
+# The distance will show the object distance coming in front of the robot. 
+# The Distance is taken by bursting a beam of ultrasonic up to 10 us and receiving it after 10us. 
+
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);   
+digitalWrite(trigPin, HIGH);     // send waves for 10 us
+delayMicroseconds(10);
+duration = pulseIn(echoPin, HIGH); // receive reflected waves
+distance = duration / 58.2;   // convert to distance
+delay(10);
+
+# If the distance is greater than the defined distance means there is not obstacle in its path and it will moving in forward direction.
+
+ if (distance > 19)            
+            {
+            digitalWrite(fwdright7, HIGH);                    // Move Forward
+            digitalWrite(revright6, LOW);
+            digitalWrite(fwdleft5, HIGH);                                
+            digitalWrite(revleft4, LOW);                                                       
+            }
+            
+# If the distance is less than the defined distance to avoid obstacle means there is some obstacle ahead. 
+# So in this situation robot will stop for a while and movebackwards after that again stop for a while and then take turn to another direction.       
+
+ if (distance < 18)
+             {
+             digitalWrite(fwdright7, LOW);  //Stop                
+             digitalWrite(revright6, LOW);
+             digitalWrite(fwdleft5, LOW);                                
+             digitalWrite(revleft4, LOW);
+             delay(500);
+             digitalWrite(fwdright7, LOW);      //Move Backword         
+             digitalWrite(revright6, HIGH);
+             digitalWrite(fwdleft5, LOW);                                
+             digitalWrite(revleft4, HIGH);
+             delay(500);
+             digitalWrite(fwdright7, LOW);  //Stop                
+             digitalWrite(revright6, LOW);
+             digitalWrite(fwdleft5, LOW);                                
+             digitalWrite(revleft4, LOW);  
+             delay(100);  
+             digitalWrite(fwdright7, HIGH);       
+             digitalWrite(revright6, LOW);   
+             digitalWrite(revleft4, LOW);                                 
+             digitalWrite(fwdleft5, LOW);  
+             delay(500);
+            }
